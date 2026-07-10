@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rizky AI - Chat Powered by DeepSeek</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="header-info">
+                        <h1>Rizky AI</h1>
+                        <span class="model-badge">
+                            <i class="fas fa-microchip"></i> DeepSeek Model
+                        </span>
+                    </div>
+                </div>
+                <button class="settings-btn" title="Settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div class="messages" id="messages">
+                <div class="welcome-message">
+                    <div class="welcome-icon">
+                        <i class="fas fa-sparkles"></i>
+                    </div>
+                    <h2>Halo! Saya Rizky AI</h2>
+                    <p>Powered by DeepSeek</p>
+                    <div class="welcome-tips">
+                        <p>💡 Tanyakan apa saja kepada saya. Saya siap membantu dengan pertanyaan, ide, atau percakapan apapun.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Input Section -->
+        <div class="input-section">
+            <form id="chatForm" class="chat-form">
+                <div class="input-wrapper">
+                    <textarea 
+                        id="messageInput" 
+                        placeholder="Ketik pesan Anda... (Shift+Enter untuk baris baru)"
+                        rows="1"
+                    ></textarea>
+                    <button type="submit" class="send-btn" title="Kirim pesan">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </form>
+            <div class="footer-info">
+                <p>Powered by <strong>DeepSeek</strong> | Rizky AI Chat Interface</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="loadingIndicator" class="loading-indicator hidden">
+        <div class="spinner">
+            <div class="dot"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

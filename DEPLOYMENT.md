@@ -1,287 +1,188 @@
-# 🚀 Deploy Rizky AI ke Vercel
+# 🚀 Deploy Rizky AI
 
-Panduan lengkap untuk deploy website Rizky AI ke Vercel dengan serverless functions.
+Panduan lengkap untuk deploy website Rizky AI ke berbagai platform hosting.
 
-## ✨ Keunggulan Deploy di Vercel
+## 🎯 Platform Rekomendasi
 
-- ✅ **Gratis** untuk personal/hobby projects
-- ✅ **Automatic deployments** dari Git
-- ✅ **Serverless functions** (no need untuk manage server)
-- ✅ **SSL certificate** included
-- ✅ **CDN global** untuk faster loading
-- ✅ **Environment variables** support
-- ✅ **Real-time logs** & monitoring
-- ✅ **Custom domain** support
+### 1️⃣ **Railway.app** ⭐ RECOMMENDED
+- ✅ Paling mudah setup
+- ✅ Free tier tersedia
+- ✅ Auto-deploy dari GitHub
+- ✅ Unlimited bandwidth
+- ✅ Custom domain support
 
-## 📋 Prerequisites
+### 2️⃣ **Render.com**
+- ✅ Free tier (dengan sleep)
+- ✅ Auto-deploy
+- ✅ Easy database setup
+- ✅ SSL included
 
-1. **GitHub/GitLab/Bitbucket Account** - untuk source control
-2. **Vercel Account** - free di https://vercel.com
-3. **Git** installed di computer
+### 3️⃣ **Heroku** (Sekarang Bayar)
+- Dulu gratis, sekarang ada biaya
+- Stable & reliable
+- Banyak add-ons
 
-## 🎯 Step-by-Step Deployment
-
-### Cara 1: Menggunakan Vercel CLI (Recommended)
-
-#### 1. Install Vercel CLI
-```bash
-npm i -g vercel
-```
-
-#### 2. Login ke Vercel
-```bash
-vercel login
-```
-Ikuti instruksi di browser untuk authenticate.
-
-#### 3. Deploy Project
-```bash
-# Di root folder project
-vercel
-```
-
-Jawab pertanyaan yang muncul:
-```
-? Set up and deploy "~/rizky-ai"? [Y/n] Y
-? Which scope do you want to deploy to? [Your-Name]
-? Link to existing project? [y/N] N
-? What's your project's name? rizky-ai
-? In which directory is your code located? ./
-? Want to modify these settings before deploying? [y/N] N
-```
-
-#### 4. Selesai! 🎉
-```
-✓ Production: https://rizky-ai.vercel.app [copied to clipboard]
-```
+### 4️⃣ **Self-Hosted**
+- Full control
+- Biaya VPS (~$5/month)
+- Perlu manage server
 
 ---
 
-### Cara 2: Connect GitHub Repository
+## 🚂 Deploy ke Railway.app (RECOMMENDED)
 
-#### 1. Push Project ke GitHub
+Railway adalah yang paling simple dan gratis untuk personal projects.
+
+### Step 1: Prepare Repository
+
 ```bash
 git init
 git add .
-git commit -m "Initial commit: Rizky AI"
+git commit -m "Initial Rizky AI commit"
+```
+
+### Step 2: Push ke GitHub
+
+```bash
 git branch -M main
 git remote add origin https://github.com/YOUR_USERNAME/rizky-ai.git
 git push -u origin main
 ```
 
-#### 2. Login ke Vercel Website
-- Kunjungi https://vercel.com
-- Click "New Project"
+### Step 3: Connect Railway
 
-#### 3. Import Project
-- Click "Import Git Repository"
-- Paste repository URL
-- Click "Import"
+1. Buka https://railway.app
+2. Click "New Project"
+3. Select "Deploy from GitHub repo"
+4. Authorize Railway
+5. Select repository "rizky-ai"
+6. Click "Deploy"
 
-#### 4. Configure Project
-- Project name: `rizky-ai`
-- Framework: `Other` (default)
-- Root Directory: `./`
-- Click "Deploy"
+### Step 4: Railway Auto-Configure
 
-#### 5. Automatic Deployments
-Setiap push ke GitHub akan automatically deploy ke Vercel!
+Railway akan auto-detect Node.js project dan setup. Tunggu selesai.
+
+### Step 5: Get Production URL
+
+Railway automatically gives you a domain:
+```
+https://rizky-ai-production.up.railway.app
+```
+
+Atau add custom domain di Railway dashboard.
 
 ---
 
-### Cara 3: Drag & Drop (Simplest)
+## 🎨 Deploy ke Render.com
 
-1. Buka https://vercel.com/new
-2. Pilih "Other"
-3. Drag & drop folder project ke halaman
-4. Tunggu deploy selesai
+### Step 1: Connect Repository
+
+1. Buka https://render.com
+2. Click "New +"
+3. Select "Web Service"
+4. Connect GitHub account
+5. Select "rizky-ai" repository
+
+### Step 2: Configure
+
+```
+Name: rizky-ai
+Environment: Node
+Build Command: npm install
+Start Command: npm start
+```
+
+### Step 3: Deploy
+
+Click "Create Web Service" dan tunggu selesai.
+
+**Note**: Free tier di Render akan sleep. Upgrade untuk always-on.
 
 ---
 
-## ⚙️ Konfigurasi Vercel
+## 💻 Local Development
 
-### Environment Variables (Jika Diperlukan)
-```bash
-# Di vercel.json atau Vercel dashboard
-vercel env add API_KEY "your-api-key"
-```
+### Start Server
 
-Atau melalui dashboard:
-1. Settings → Environment Variables
-2. Add new variable
-3. Input key & value
-
-### Custom Domain
-1. Buka Project Settings
-2. Click "Domains"
-3. Add your domain (e.g., rizky-ai.com)
-4. Follow DNS instructions
-
----
-
-## 📝 File Structure untuk Vercel
-
-```
-rizky-ai/
-├── api/                    # Serverless functions
-│   ├── chat.js            # Chat endpoint
-│   └── health.js          # Health check
-├── public/                # Static files
-│   └── (optional)
-├── index.html             # Main HTML
-├── style.css              # Styles
-├── script.js              # Frontend JS
-├── package.json           # Dependencies
-├── vercel.json            # Vercel config
-├── .gitignore             # Git ignore rules
-└── README.md              # Documentation
-```
-
----
-
-## 🔍 Testing Deployment
-
-### Test di Local Vercel Environment
-```bash
-vercel dev
-```
-Ini akan simulate production environment di local.
-
-### Test Endpoints
-```bash
-# Chat endpoint
-curl -X POST https://rizky-ai.vercel.app/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{"message":"Halo!"}'
-
-# Health check
-curl https://rizky-ai.vercel.app/api/health
-```
-
----
-
-## 📊 Monitor Deployments
-
-### Via CLI
-```bash
-vercel list                    # List all deployments
-vercel logs                    # See real-time logs
-vercel remove [deployment-id]  # Remove deployment
-```
-
-### Via Dashboard
-1. Buka https://vercel.com/dashboard
-2. Click project "rizky-ai"
-3. Tab "Deployments" untuk history
-4. Tab "Analytics" untuk metrics
-
----
-
-## 🐛 Troubleshooting
-
-### Problem: "Cannot find module 'axios'"
-**Solution:**
 ```bash
 npm install
-git add package-lock.json
-git commit -m "Update dependencies"
-git push
+npm start
 ```
 
-### Problem: "CORS errors"
-**Solution:**
-Pastikan `vercel.json` sudah benar dengan CORS headers.
+Server akan run di `http://localhost:3000`
 
-### Problem: "DeepSeek API timeout"
-**Solution:**
-- Vercel free tier timeout: 60 detik
-- Upgrade ke Pro jika perlu timeout lebih lama
-- Atau optimize DeepSeek request
+### Test Chat API
 
-### Problem: "Deployment failed"
-**Solution:**
-1. Check logs: `vercel logs`
-2. Ensure all dependencies di package.json
-3. Ensure vercel.json syntax benar
-4. Redeploy: `vercel --prod`
+```bash
+curl -X POST http://localhost:3000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message":"Halo!"}'
+```
 
 ---
 
-## 🔐 Security Best Practices
+## 🖥️ Self-Hosted (Digital Ocean / Linode)
 
-1. **Jangan commit API keys**
-   ```
-   # .gitignore
-   .env
-   .env.local
-   ```
+### Setup VPS
 
-2. **Use Environment Variables**
-   ```javascript
-   // Vercel dashboard → Settings → Environment Variables
-   const apiKey = process.env.DEEPSEEK_API_KEY;
-   ```
+```bash
+ssh root@your_server_ip
 
-3. **Rate Limiting** (untuk production)
+apt update && apt upgrade -y
+curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+apt install -y nodejs
+npm i -g pm2
+```
+
+### Deploy Application
+
+```bash
+git clone https://github.com/YOUR_USERNAME/rizky-ai.git
+cd rizky-ai
+npm install
+pm2 start server.js --name "rizky-ai"
+pm2 startup && pm2 save
+```
+
+### Setup Nginx + SSL
+
+```bash
+apt install nginx -y
+apt install certbot python3-certbot-nginx -y
+certbot --nginx -d your-domain.com
+```
+
+---
+
+## 📊 Quick Comparison
+
+| Platform | Cost | Setup Time | Ease | SSL | Custom Domain |
+|----------|------|-----------|------|-----|--------------|
+| Railway | Free* | 5 min | ⭐⭐⭐⭐⭐ | ✅ | ✅ |
+| Render | Free* | 10 min | ⭐⭐⭐⭐ | ✅ | ✅ |
+| Self-Hosted | $5-50/mo | 1+ hour | ⭐⭐ | ✅ | ✅ |
+
+---
+
+## 🎉 Deploy Summary
+
+1. **Push ke GitHub**
    ```bash
-   npm install express-rate-limit
+   git push origin main
    ```
 
-4. **HTTPS Only** - Vercel automatically provides SSL
+2. **Connect ke Railway/Render**
+   - Select repository
+   - Click deploy
+
+3. **Get URL**
+   - Visit production link
+   - Test chat
+
+4. **Custom Domain** (Optional)
+   - Update DNS
+   - Add domain di hosting dashboard
 
 ---
 
-## 📈 Scaling Tips
-
-### For Free Tier Users
-- Max 5 serverless functions
-- 60 second timeout per request
-- 1,000 GB bandwidth/month
-- Good for hobby/personal projects
-
-### For Pro/Enterprise
-- More functions & longer timeouts
-- Priority support
-- Custom domains & SSL
-- Advanced analytics
-
-### Optimize Performance
-1. **Minimize API calls** - batch requests
-2. **Cache responses** - untuk repeated queries
-3. **Compress assets** - CSS/JS minification
-4. **CDN** - Vercel's global CDN
-
----
-
-## 🎓 Learning Resources
-
-- **Vercel Docs**: https://vercel.com/docs
-- **Serverless Functions**: https://vercel.com/docs/functions/serverless-functions
-- **Environment Variables**: https://vercel.com/docs/projects/environment-variables
-
----
-
-## ✅ Deployment Checklist
-
-- [ ] Project pushed to GitHub
-- [ ] vercel.json configured
-- [ ] package.json has correct scripts
-- [ ] .gitignore file exists
-- [ ] No hardcoded API keys
-- [ ] Environment variables set (if needed)
-- [ ] Deployment successful on Vercel
-- [ ] Test /api/chat endpoint
-- [ ] Test /api/health endpoint
-- [ ] Custom domain configured (optional)
-
----
-
-## 🎉 Selesai!
-
-Website Rizky AI sudah live di Vercel! 🚀
-
-**URL Production:** `https://rizky-ai.vercel.app`
-
-Setiap update ke GitHub akan automatically deploy ke Vercel.
-
-**Happy deploying!** 💚
+**Selamat! Aplikasi Rizky AI sudah live!** 🚀
